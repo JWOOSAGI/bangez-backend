@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping(path = "/article")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "*")
 public class ArticleController {
 
     private final ArticleService service;

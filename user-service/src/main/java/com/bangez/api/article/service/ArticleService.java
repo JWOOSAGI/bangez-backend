@@ -24,14 +24,32 @@ public interface ArticleService {
                 .build();
     }
 
-    default Article dtoToEntity(ArticleDTO dto){
+    default Article dtoToEntity(ArticleDTO dto) {
         return Article.builder()
                 .id(dto.getId())
+                .postTitle(dto.getPostTitle())
+                .postContent(dto.getPostContent())
+                .postDate(dto.getPostDate())
                 .boardHits(dto.getBoardHits())
                 .postType(dto.getPostType())
-                .postContent(dto.getPostContent())
-                .postTitle(dto.getPostTitle())
+                .buildType(dto.getBuildType())
+                .tradeType(dto.getTradeType())
+                .location(dto.getLocation())
+                .rentPrice(dto.getRentPrice())
+                .monthPrice(dto.getMonthPrice())
+                .tradePrice(dto.getTradePrice())
+                .size(dto.getSize())
+                .roomCount(dto.getRoomCount())
+                .toiletCount(dto.getToiletCount())
+                .numberOfApt(dto.getNumberOfApt())
+                .acceptForUse(dto.getAcceptForUse())
+                .parking(dto.getParking())
+                .convenient(dto.getConvenient().toString())
+                .floor(dto.getFloor())
+                .hopeMove(dto.getHopeMove())
+                .moreContent(dto.getMoreContent())
                 .build();
     }
+
 
 }
