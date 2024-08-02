@@ -1,11 +1,10 @@
-package com.bangez.api.article.domain;
+package com.bangez.api.buyArticle.domain;
 
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,8 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(exclude = {"id"})
-@Entity(name = "articles")
-public class Article extends BaseEntity {
+@Entity(name = "buyArticles")
+public class BuyArticle extends BuyBaseEntity {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +22,6 @@ public class Article extends BaseEntity {
     private String postContent;  //내용
     private LocalDate postDate;  //시간
     private Long boardHits;  //조회수
-    private Long postType;  //게시글 타입
     private String buildType;  //건물 유형
     private String tradeType;  //거래 유형
     private String location;  //지역
@@ -40,6 +38,7 @@ public class Article extends BaseEntity {
     private String floor; //층수
     private String hopeMove; //입주 희망일
     private String moreContent; //추가 희망 사항
+    private String status;  //거래 상태
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "user_id", nullable = true)

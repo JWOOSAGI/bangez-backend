@@ -1,4 +1,4 @@
-package com.bangez.api.article.domain;
+package com.bangez.api.sellArticle.domain;
 
 
 import jakarta.persistence.Column;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class BaseEntity {
+public class SellBaseEntity {
 
     @CreationTimestamp
     @Column(updatable = false)

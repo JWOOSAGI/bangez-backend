@@ -1,4 +1,4 @@
-package com.bangez.api.article.domain;
+package com.bangez.api.buyArticle.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,13 +14,12 @@ import java.util.List;
 @Data
 @Component
 @Builder
-public class ArticleDTO {
+public class BuyArticleDTO {
     private Long id;
     private String postTitle;  // 제목
     private String postContent;  // 내용
     private LocalDate postDate;  // 시간
     private Long boardHits;  // 조회수
-    private Long postType;  // 게시글 타입
     private String buildType;  // 건물 유형
     private String tradeType;  // 거래 유형
     private String location;  // 지역
@@ -37,4 +36,5 @@ public class ArticleDTO {
     private String floor; // 층수
     private String hopeMove; // 입주 희망일
     private String moreContent; // 추가 희망 사항
+    private String status= "구하는 중";   //거래 상태
 }
