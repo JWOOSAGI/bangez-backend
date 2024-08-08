@@ -1,7 +1,7 @@
 spring:
   application:
-    name: api-gateway
+    name: gateway-server
   profiles:
     active: local
   config:
-    import: optional:configserver:http://223.130.163.31:8888
+    import: optional:configserver:http://223.130.151.210:8888

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bangez-deployment
+  labels:
+    app: bangez
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bangez
+  template:
+    metadata:
+      labels:
+        app: bangez
+    spec:
+      containers:
+        - name: bangez-eureka
+          image: nohtaeho1/bangez-eureka-server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8761
+        - name: bangez-gateway
+          image: nohtaeho1/bangez-gateway-server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+        - name: bangez-tx
+          image: nohtaeho1/bangez-tx-service:latest
+          ports:
+            - containerPort: 8081
+          imagePullPolicy: Always
+        - name: bangez-user
+          image: nohtaeho1/bangez-user-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8082
+        - name: bangez-land
+          image: nohtaeho1/bangez-land-service:latest
+          ports:
+            - containerPort: 8083
+          imagePullPolicy: Always
+        - name: bangez-chat
+          image: nohtaeho1/bangez-chat-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8085
+        - name: bangez-analysis
+          image: nohtaeho1/bangez-analysis-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8084
+
