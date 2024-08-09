@@ -21,6 +21,15 @@ public class SellArticleServiceImpl implements SellArticleService {
 
     @Override
     public MessengerVO save(SellArticleDTO dto) {
+        if (dto.getRentPrice() == null){
+            dto.setRentPrice(0L);
+        }
+        if (dto.getMonthPrice()==null){
+            dto.setMonthPrice(0L);
+        }
+        if (dto.getTradePrice()==null){
+            dto.setTradePrice(0L);
+        }
         repository.save(dtoToEntity(dto));
         return MessengerVO.builder().message("성공").build();
     }
