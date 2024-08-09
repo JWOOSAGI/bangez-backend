@@ -3,6 +3,7 @@ package com.bangez.api.buyArticle.controller;
 import com.bangez.api.buyArticle.domain.BuyArticle;
 import com.bangez.api.buyArticle.domain.BuyArticleDTO;
 import com.bangez.api.buyArticle.service.BuyArticleService;
+import com.bangez.api.buyArticle.service.impl.BuyArticleServiceImpl;
 import com.bangez.api.common.MessengerVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/buy-article")
@@ -18,7 +20,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class BuyArticleController {
 
-    private final BuyArticleService service;
+    private final BuyArticleServiceImpl service;
 
     @PostMapping("/save")
     public ResponseEntity<MessengerVO> save(@RequestBody BuyArticleDTO dto) {
@@ -41,6 +43,12 @@ public class BuyArticleController {
     public ResponseEntity<BuyArticle> modify(@PathVariable Long id, @RequestBody BuyArticle newBuyArticle){
         log.info("입력받은 정보 : {}", newBuyArticle);
         return ResponseEntity.ok(service.modify(id, newBuyArticle));
+    }
+
+    @GetMapping(path = "/detail")
+    public ResponseEntity<Optional<BuyArticleDTO>> findById(@RequestParam Long id) {
+        log.info("입력받은 정보 : {}", id );
+        return ResponseEntity.ok(service.findById(id));
     }
 
 

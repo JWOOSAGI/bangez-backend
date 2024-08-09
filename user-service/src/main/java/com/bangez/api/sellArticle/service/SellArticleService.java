@@ -6,12 +6,15 @@ import com.bangez.api.sellArticle.domain.SellArticleDTO;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public interface SellArticleService {
     MessengerVO save(SellArticleDTO sellArticleDTO);
     MessengerVO deleteById(Long id);
     List<SellArticleDTO> findAll();
     SellArticle modify(Long id, SellArticle newSellArticle);
+    Optional<SellArticleDTO> findById(Long id);
+
 
 
     default SellArticleDTO entityToDTO(SellArticle sellArticle){
