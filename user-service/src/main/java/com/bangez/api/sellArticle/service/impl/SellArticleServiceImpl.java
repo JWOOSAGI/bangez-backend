@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,18 +20,8 @@ public class SellArticleServiceImpl implements SellArticleService {
 
     private final SellArticleRepository repository;
 
-
     @Override
     public MessengerVO save(SellArticleDTO dto) {
-        if (dto.getRentPrice() == null){
-            dto.setRentPrice(0L);
-        }
-        if (dto.getMonthPrice()==null){
-            dto.setMonthPrice(0L);
-        }
-        if (dto.getTradePrice()==null){
-            dto.setTradePrice(0L);
-        }
         repository.save(dtoToEntity(dto));
         return MessengerVO.builder().message("성공").build();
     }
@@ -43,24 +34,40 @@ public class SellArticleServiceImpl implements SellArticleService {
 
     @Override
     public List<SellArticleDTO> findAll() {
-        return repository.findAll().stream().map(i->entityToDTO(i)).toList();
+        return repository.findAll().stream()
+                .map(this::entityToDTO)
+                .toList();
     }
 
     @Override
     public SellArticle modify(Long id, SellArticle newSellArticle) {
-        return repository.findById(id).map(sellArticle -> {
-            if (newSellArticle.getPostTitle() !=null){
-                sellArticle.setPostTitle(newSellArticle.getPostTitle());
+        SellArticle existingArticle = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없음"));
+
+        // 리플렉션을 사용하여 필드를 업데이트합니다.
+        updateFields(existingArticle, newSellArticle);
+
+        return repository.save(existingArticle);
+    }
+
+    private void updateFields(SellArticle existingArticle, SellArticle newSellArticle) {
+        Field[] fields = SellArticle.class.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true); // private 필드에도 접근 가능하게 설정
+
+            try {
+                Object newValue = field.get(newSellArticle);
+                if (newValue != null) {
+                    field.set(existingArticle, newValue);
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("필드 접근 중 오류 발생", e);
             }
-            if (newSellArticle.getPostContent() !=null) {
-                sellArticle.setPostContent(newSellArticle.getPostContent());
-            }
-            return repository.save(sellArticle);
-        }).orElseThrow(()->new RuntimeException("게시글을 찾을 수 없음"));
+        }
     }
 
     @Override
     public Optional<SellArticleDTO> findById(Long id) {
-        return repository.findById(id).map(this ::entityToDTO);
+        return repository.findById(id).map(this::entityToDTO);
     }
 }

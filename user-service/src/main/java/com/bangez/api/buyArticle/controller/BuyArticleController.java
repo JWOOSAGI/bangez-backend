@@ -35,7 +35,7 @@ public class BuyArticleController {
     }
 
     @GetMapping(path = "/list")
-    public ResponseEntity<List<BuyArticleDTO>> findAll( ) {
+    public ResponseEntity<List<BuyArticleDTO>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 
@@ -50,6 +50,4 @@ public class BuyArticleController {
         log.info("입력받은 정보 : {}", id );
         return ResponseEntity.ok(service.findById(id));
     }
-
-
 }

@@ -21,7 +21,8 @@ public class BuyArticle extends BuyBaseEntity {
     private String postTitle;  //제목
     private String postContent;  //내용
     private LocalDate postDate;  //시간
-    private Long boardHits;  //조회수
+    @Column(name = "boardHits", nullable = false)
+    private int boardHits;  //조회수
     private String buildType;  //건물 유형
     private String tradeType;  //거래 유형
     private String location;  //지역

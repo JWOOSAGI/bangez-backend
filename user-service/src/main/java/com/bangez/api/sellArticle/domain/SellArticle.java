@@ -36,7 +36,7 @@ public class SellArticle extends SellBaseEntity {
     private String parking; //주차대수
     private String convenient; //편의시설
     private String floor; //층수
-    private String hopeMove; //입주 희망일
+    private String hopeMove; //입주 가능일
     private String status;  //거래 상태
 
 //    @ManyToOne(fetch = FetchType.LAZY)

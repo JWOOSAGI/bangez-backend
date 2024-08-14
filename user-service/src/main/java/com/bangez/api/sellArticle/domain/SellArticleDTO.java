@@ -23,9 +23,9 @@ public class SellArticleDTO {
     private String buildType;  //건물 유형
     private String tradeType;  //거래 유형
     private String location;  //지역
-    private Long rentPrice=0L;  //보증금 or 전세금 (단위:만)
-    private Long monthPrice=0L;  //월세 (단위:만)
-    private Long tradePrice=0L; //매매 (단위:만)
+    private Long rentPrice;  //보증금 or 전세금 (단위:만)
+    private Long monthPrice;  //월세 (단위:만)
+    private Long tradePrice; //매매 (단위:만)
     private Long size; //면적 (단위:평)
     private Long roomCount; //방 개수
     private Long toiletCount; //화장실/욕실 개수
@@ -36,4 +36,8 @@ public class SellArticleDTO {
     private String floor; //층수
     private String hopeMove; //입주 희망일
     private String status = "판매중";  //거래 상태
+
+    public void setConvenient(List<String> convenient) {
+        this.convenient = (convenient == null || convenient.isEmpty()) ? List.of("없음") : convenient;
+    }
 }
