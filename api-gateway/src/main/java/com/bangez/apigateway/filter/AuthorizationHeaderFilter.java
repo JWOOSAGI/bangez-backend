@@ -1,7 +1,7 @@
 package com.bangez.apigateway.filter;
 
 import com.bangez.apigateway.domain.vo.Role;
-import com.bangez.apigateway.service.provider.JwtTokenProvider;
+import com.bangez.apigateway.provider.JwtTokenProvider;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;

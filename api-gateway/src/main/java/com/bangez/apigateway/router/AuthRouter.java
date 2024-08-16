@@ -1,8 +1,9 @@
 package com.bangez.apigateway.router;
 
 import com.bangez.apigateway.domain.dto.LoginDTO;
-import com.bangez.apigateway.filter.AuthFilter;
+import com.bangez.apigateway.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,12 +12,12 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 
+@Slf4j
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthRouter {
-//        private final AuthService authService;
-    private final AuthFilter authFilter;
+        private final AuthService authService;
 
     //    @PostMapping("/login/local")
 //    public Mono<ServerResponse> login(@RequestBody LoginDTO dto) {
@@ -35,9 +36,9 @@ public class AuthRouter {
     @Bean
     RouterFunction<ServerResponse> authRoutes() {
         return RouterFunctions.route()
-                .POST("/auth/login/local", req -> req.bodyToMono(LoginDTO.class).flatMap(authFilter::localLogin))
-                .POST("/auth/refresh", req -> ServerResponse.ok().build())
-                .POST("/auth/logout", req -> ServerResponse.ok().build())
+                .POST("/auth/login/local", req -> req.bodyToMono(LoginDTO.class).flatMap(authService::localLogin))
+                .POST("/auth/refresh", req -> authService.refresh(req.headers().header("Authorization").get(0))) //로그아웃 시 compact JWT strings may not contain whitespace 에러 발생함.
+                .POST("/auth/logout", req -> authService.logout(req.headers().header("Authorization").get(0)))
                 .build();
     }
 }

@@ -2,9 +2,10 @@ package com.bangez.apigateway.service.impl;
 
 import com.bangez.apigateway.domain.dto.LoginDTO;
 import com.bangez.apigateway.domain.model.PrincipalUserDetails;
+import com.bangez.apigateway.provider.JwtTokenProvider;
 import com.bangez.apigateway.service.AuthService;
-import com.bangez.apigateway.service.provider.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -41,7 +43,9 @@ public class AuthServiceImpl implements AuthService {
                                                                                 .value(accessToken)
                                                                                 .maxAge(jwtTokenProvider.getAccessTokenExpired())
                                                                                 .path("/")
-                                                                                // .httpOnly(true)
+                                                                                .sameSite("None")
+                                                                                .secure(true)
+                                                                                .httpOnly(false)
                                                                                 .build()
                                                                 )
                                                                 .cookie(
@@ -49,10 +53,12 @@ public class AuthServiceImpl implements AuthService {
                                                                                 .value(refreshToken)
                                                                                 .maxAge(jwtTokenProvider.getRefreshTokenExpired())
                                                                                 .path("/")
-                                                                                // .httpOnly(true)
+                                                                                .sameSite("None")
+                                                                                .secure(true)
+                                                                                .httpOnly(false)
                                                                                 .build()
                                                                 )
-                                                                .build()
+                                                                .bodyValue(Boolean.TRUE)
                                                 )
                                 )
                 )
@@ -85,6 +91,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Mono<ServerResponse> logout(String refreshToken) {
+        log.info("로그아웃 서비스");
         return Mono.just(refreshToken)
                 .flatMap(i -> Mono.just(jwtTokenProvider.removeBearer(refreshToken)))
                 .filter(i -> jwtTokenProvider.isTokenValid(refreshToken, true))

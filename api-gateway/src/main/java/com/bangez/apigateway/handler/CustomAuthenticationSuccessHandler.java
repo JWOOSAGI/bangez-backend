@@ -2,7 +2,7 @@ package com.bangez.apigateway.handler;
 
 import com.bangez.apigateway.domain.dto.MessengerDTO;
 import com.bangez.apigateway.domain.model.PrincipalUserDetails;
-import com.bangez.apigateway.service.provider.JwtTokenProvider;
+import com.bangez.apigateway.provider.JwtTokenProvider;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
