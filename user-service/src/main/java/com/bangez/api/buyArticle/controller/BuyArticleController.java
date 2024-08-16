@@ -17,7 +17,6 @@ import java.util.Optional;
 @RequestMapping(path = "/buy-article")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "*")
 public class BuyArticleController {
 
     private final BuyArticleServiceImpl service;
