@@ -1,13 +1,10 @@
 package com.bangez.tx.domain.model;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "transactions")
 @Getter

@@ -1,9 +1,8 @@
 package com.bangez.chat.controller;
+
 import com.bangez.chat.domain.dto.ChatDto;
 import com.bangez.chat.domain.dto.Messenger;
-import com.bangez.chat.domain.model.ChatModel;
 import com.bangez.chat.service.impl.ChatServiceImpl;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

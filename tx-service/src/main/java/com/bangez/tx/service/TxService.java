@@ -1,10 +1,9 @@
 package com.bangez.tx.service;
 
-import java.util.List;
-
-import com.bangez.tx.domain.dto.PointDto;
 import com.bangez.tx.domain.dto.TxDto;
 import com.bangez.tx.domain.model.TxModel;
+
+import java.util.List;
 
 public interface TxService {
 
