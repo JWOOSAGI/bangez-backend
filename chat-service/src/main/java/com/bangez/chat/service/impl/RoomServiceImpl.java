@@ -1,10 +1,10 @@
 package com.bangez.chat.service.impl;
+
 import com.bangez.chat.domain.dto.Messenger;
 import com.bangez.chat.domain.dto.RoomDto;
 import com.bangez.chat.domain.model.RoomModel;
 import com.bangez.chat.repository.RoomRepository;
 import com.bangez.chat.service.RoomService;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

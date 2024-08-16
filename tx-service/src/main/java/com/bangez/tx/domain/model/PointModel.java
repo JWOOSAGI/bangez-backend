@@ -1,12 +1,10 @@
 package com.bangez.tx.domain.model;
 
-import com.bangez.tx.domain.dto.PointDto;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "points")
 @Getter

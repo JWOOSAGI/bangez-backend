@@ -1,10 +1,9 @@
 package com.bangez.tx.service;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
 import com.bangez.tx.domain.dto.PointDto;
 import com.bangez.tx.domain.model.PointModel;
+
+import java.math.BigDecimal;
 
 public interface PointService {
      void savePoint(BigDecimal amount, Long userId) ;
